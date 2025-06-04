@@ -26,9 +26,13 @@ def classification_functionIVB(ssa,eae):
     if ssa >= 0.95 and eae <= 0.6:
              return 8  # WACP
 
-def classify_methodIVB(data, aod_error, ssa_error):
+def classify_methodIVB(data, aod_error, ssa_error, filter_aod):
     aerosol_types = {1: 'StrAFP', 2: 'MAFP', 3: 'SliAFP', 4: 'WAFP', 5: 'MAP', 6: 'MWAP', 7: 'ACP', 8: 'WACP'}
+    if 'eae440_870' not in data.columns:
+        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
     df = data[['aod440', 'aod870', 'eae440_870', 'ssa440']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df4B= propagate_uncertainties(4, df, aod_error, ssa_error, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df4B['ssa_sub']
     sub2 = df4B['eae_sub']

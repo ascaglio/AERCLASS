@@ -18,9 +18,13 @@ def classification_functionV(aae,eae,dist1,dist2):
             return 2 if dist1 < dist2 else 3 #UI or BB
     return 4  # NC
 
-def classify_methodV(data, aod_error, ssa_error):
+def classify_methodV(data, aod_error, ssa_error, filter_aod):
     aerosol_types = {1: 'D', 2: 'UI', 3: 'BB', 4: 'NC'}
+    if 'eae440_870' not in data.columns:
+        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
     df = data[['aod440', 'aod870', 'ssa440', 'ssa870', 'eae440_870']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df5= propagate_uncertainties(5, df, aod_error, ssa_error, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df5['aae_sub']
     sub2 = df5['eae_sub']

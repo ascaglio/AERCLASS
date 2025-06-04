@@ -17,9 +17,13 @@ def classification_functionVI(rri, eae):
     else:
         return 4  # NC
 
-def classify_methodVI(data, aod_error, rri_error):
+def classify_methodVI(data, aod_error, rri_error, filter_aod):
     aerosol_types = {1: 'D', 2: 'UI', 3: 'BB', 4: 'NC'}
+    if 'eae440_870' not in data.columns:
+        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
     df = data[['aod440', 'aod870', 'eae440_870', 'rri440']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df6 = propagate_uncertainties(6, df, aod_error, 0, rri_error)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df6['rri_sub']
     sub2 = df6['eae_sub']

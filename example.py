@@ -1,29 +1,31 @@
 # IMPORT LIBRARIES
-from aerclass.classification_methodI import * 
-from aerclass.classification_methodII import * 
-from aerclass.classification_methodIII import * 
-from aerclass.classification_methodIVA import * 
-from aerclass.classification_methodIVB import * 
-from aerclass.classification_methodV import * 
-from aerclass.classification_methodVI import * 
+from scripts.classification_methodI import * 
+from scripts.classification_methodII import * 
+from scripts.classification_methodIII import * 
+from scripts.classification_methodIVA import * 
+from scripts.classification_methodIVB import * 
+from scripts.classification_methodV import * 
+from scripts.classification_methodVI import * 
 import pandas as pd
 
 # SET DATA AND PARAMETERS
-FILE = "solarvillage_daily.xlsx"   # Set file path and name (e.g. '...alta_floresta_daily.xlsx')
+FILE = "alta_floresta_daily.xlsx"   # Set file path and name (e.g. '...alta_floresta_daily.xlsx')
 aod_error = 0.01                    # Set AOD error (0.01 by default)
 ssa_error = 0.03                    # Set SSA error (0.03 by default)    
 rri_error = 0.04                    # Set RRI error (0.04 by default)
-SITE = 'Solar Village'              # Set site name
+SITE = 'Alta Floresta'              # Set site name
 data = pd.read_excel(FILE)          # Organize data into a dataframe
+filter_aod = [False,0.4]             # Exclude aod<0.4 if filter_aod[0] = True 
+                                   
 
 # CALL TO CLASSIFICATION METHODS
-outcomeI, dfI = classify_methodI(data, aod_error)                      # Outcome from classification method I
-outcomeII, dfII = classify_methodII(data, aod_error)                   # Outcome from classification method II
-outcomeIII, dfIII = classify_methodIII(data, aod_error)                # Outcome from classification method III
-outcomeIVA, dfIVA = classify_methodIVA(data, aod_error, ssa_error)     # Outcome from classification method IV
-outcomeIVB, dfIVB = classify_methodIVB(data, aod_error, ssa_error)     # Outcome from classification method V
-outcomeV, dfV = classify_methodV(data, aod_error, ssa_error)           # Outcome from classification method VI
-outcomeVI, dfVI = classify_methodVI(data, aod_error, rri_error)        # Outcome from classification method VII
+outcomeI, dfI = classify_methodI(data, aod_error, filter_aod)                      # Outcome from classification method I
+outcomeII, dfII = classify_methodII(data, aod_error, filter_aod)                   # Outcome from classification method II
+outcomeIII, dfIII = classify_methodIII(data, aod_error, filter_aod)                # Outcome from classification method III
+outcomeIVA, dfIVA = classify_methodIVA(data, aod_error, ssa_error, filter_aod)     # Outcome from classification method IV
+outcomeIVB, dfIVB = classify_methodIVB(data, aod_error, ssa_error, filter_aod)     # Outcome from classification method V
+outcomeV, dfV = classify_methodV(data, aod_error, ssa_error, filter_aod)           # Outcome from classification method VI
+outcomeVI, dfVI = classify_methodVI(data, aod_error, rri_error, filter_aod)        # Outcome from classification method VII
 
 # PLOTS
 distI = distribution_plotI(dfI,SITE,300,0.7,14)            # Plot of distribution with the classification method I
