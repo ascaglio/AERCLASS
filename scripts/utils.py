@@ -12,9 +12,10 @@ def propagate_uncertainties(method, df, aod_error, ssa_error, rri_error):
     LOG_RATIO = np.log(440 / 870)  # Precompute the constant log ratio
     LOG_DIFF = math.log10(870) - math.log10(440)
     aod_sob, aod_sub = df['aod440'] + aod_error, np.maximum(df['aod440'] - aod_error, 0)
-    eae_error = np.abs(((1 / (df['aod870'] * LOG_RATIO)) + 
+    if 'eae440_870' in df.columns:
+        eae_error = np.abs(((1 / (df['aod870'] * LOG_RATIO)) + 
                     (1 / (df['aod440'] * LOG_RATIO))) * aod_error)
-    eae_sob, eae_sub = df['eae440_870'] + eae_error, np.maximum(df['eae440_870'] - eae_error, 0)
+        eae_sob, eae_sub = df['eae440_870'] + eae_error, np.maximum(df['eae440_870'] - eae_error, 0)
     if method == 1:
         df['eae_error'] = eae_error
         df['eae_sob'], df['eae_sub'] = eae_sob, eae_sub

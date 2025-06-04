@@ -18,9 +18,13 @@ def classification_functionIVA(ssa,eae,dist1,dist2):
 def distance(p1, p2):
     return np.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
-def classify_methodIVA(data, aod_error, ssa_error):
+def classify_methodIVA(data, aod_error, ssa_error, filter_aod):
     aerosol_types = {1: 'D', 2: 'UI', 3: 'BB', 4: 'NC'}
+    if 'eae440_870' not in data.columns:
+        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
     df = data[['aod440', 'aod870', 'eae440_870', 'ssa440']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df4A= propagate_uncertainties(4, df, aod_error, ssa_error, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df4A['ssa_sub']
     sub2 = df4A['eae_sub']

@@ -22,9 +22,11 @@ def classification_functionII(aod,arod):
     else:
         return 6 #C
     
-def classify_methodII(data, aod_error):
+def classify_methodII(data, aod_error, filter_aod):
     aerosol_types = {1: 'M', 2: 'D', 3: 'SC', 4: 'UI', 5: 'BB', 6: 'C'}
-    df = data[['aod440', 'aod870', 'aod1020', 'eae440_870']].dropna().reset_index(drop=True)
+    df = data[['aod440', 'aod1020']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df2= propagate_uncertainties(2, df, aod_error, 0, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df2['aod_sub']
     sub2 = df2['arod_sub']

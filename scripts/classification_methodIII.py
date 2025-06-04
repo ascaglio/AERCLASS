@@ -16,9 +16,11 @@ def classification_functionIII(aod,fmf):
     else:
         return 3  # C
     
-def classify_methodIII(data, aod_error):
+def classify_methodIII(data, aod_error, filter_aod):
     aerosol_types = {1: 'M', 2: 'D', 3: 'C'}
-    df = data[['aod440', 'aod500', 'aod870', 'eae440_870', 'fmf500', 'rmse_fmf']].dropna().reset_index(drop=True)
+    df = data[['aod440', 'aod500', 'fmf500', 'rmse_fmf']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df3= propagate_uncertainties(3, df, aod_error, 0, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df3['aod500_sub']
     sub2 = df3['fmf_sub']

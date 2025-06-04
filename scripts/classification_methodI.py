@@ -18,9 +18,13 @@ def classification_functionI(aod,eae):
     else:
         return 4  # MDM
     
-def classify_methodI(data, aod_error):
+def classify_methodI(data, aod_error, filter_aod):
     aerosol_types = {1: 'M', 2: 'MUIBB', 3: 'BB', 4: 'MDM'}
+    if 'eae440_870' not in data.columns:
+        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
     df = data[['aod440', 'aod870', 'eae440_870']].dropna().reset_index(drop=True)
+    if filter_aod[0] == True:
+        df = df[df['aod440'] >= filter_aod[1]]
     df1= propagate_uncertainties(1, df, aod_error, 0, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
     sub1 = df['aod_sub']
     sub2 = df['eae_sub']
