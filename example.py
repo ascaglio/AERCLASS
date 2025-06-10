@@ -72,6 +72,19 @@ methodIVB.drop(0, axis=0, inplace=True)
 methodV.drop(0, axis=0, inplace=True)
 methodVI.drop(0, axis=0, inplace=True)
 
+labels = ['M','MUIBB','BB','MDM','TMR']
+plt.plot(methodI['aod_error'],methodI['M'])
+plt.scatter(methodI['aod_error'],methodI['M'])
+plt.plot(methodI['aod_error'],methodI['MUIBB'])
+plt.scatter(methodI['aod_error'],methodI['MUIBB'])
+plt.plot(methodI['aod_error'],methodI['BB'])
+plt.scatter(methodI['aod_error'],methodI['BB'])
+plt.plot(methodI['aod_error'],methodI['MDM'])
+plt.plot(methodI['aod_error'],methodI['TMR'],color='k',linewidth=4)
+plt.legend(labels)
+plt.xlabel('AOD error')
+plt.ylabel('MR(%)')
+
 
 
 '''
