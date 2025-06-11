@@ -1,4 +1,4 @@
-# classification method IVA,  SSA VS EAE (Zheng et al., 2020)
+# classification method IVA,  SSA VS EAE (Zheng et al., 2021)
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
