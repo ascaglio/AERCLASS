@@ -20,9 +20,9 @@ def classification_functionI(aod,eae):
     
 def classify_methodI(data, aod_error, filter_aod):
     aerosol_types = {1: 'M', 2: 'MUIBB', 3: 'BB', 4: 'MDM'}
-    if 'eae440_870' not in data.columns:
-        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
-    df = data[['aod440', 'aod870', 'eae440_870']].dropna().reset_index(drop=True)
+    if 'eae' not in data.columns:
+        data['eae'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
+    df = data[['aod440', 'aod870', 'eae']].dropna().reset_index(drop=True)
     if filter_aod[0] == True:
         df = df[df['aod440'] >= filter_aod[1]]
     df1= propagate_uncertainties(1, df, aod_error, 0, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
@@ -30,7 +30,7 @@ def classify_methodI(data, aod_error, filter_aod):
     sub2 = df['eae_sub']
     sob1 = df['aod_sob']
     sob2 = df['eae_sob']
-    df1['class'] = [classification_functionI(a, e) for a, e in zip(df1['aod440'], df1['eae440_870'])]
+    df1['class'] = [classification_functionI(a, e) for a, e in zip(df1['aod440'], df1['eae'])]
     df1['class_00'] = [classification_functionI(a, e) for a, e in zip(sub1, sub2)]
     df1['class_01'] = [classification_functionI(a, e) for a, e in zip(sub1, sob2)]
     df1['class_10'] = [classification_functionI(a, e) for a, e in zip(sob1, sub2)]
@@ -48,13 +48,13 @@ def distribution_plotI(df, site, resolution, transparency, font_size):
     ]
     for x, y, w, h, color, label in patches_data:
         ax1.add_patch(patches.Rectangle((x, y), w, h, linewidth=3, edgecolor=color, facecolor=color, alpha=0.2, label=label))
-    ax1.scatter(df['aod440'], df['eae440_870'], color='white', edgecolor='k', alpha=transparency)
+    ax1.scatter(df['aod440'], df['eae'], color='white', edgecolor='k', alpha=transparency)
     ax1.legend(loc='upper right', bbox_to_anchor=(1.25, 1.2))
     ax1.set_xlabel(r'$AOD_{440}$', fontsize=font_size)
     ax1.set_ylabel(r'$EAE_{870/440}$', fontsize=font_size)
     ax1.set_title(f'{site} - EAE vs AOD (Cúneo et al., 2022)', fontsize=font_size)
     plt.xlim(0, df['aod440'].max() + 0.1)
-    plt.ylim(0, df['eae440_870'].max() + 0.1)
+    plt.ylim(0, df['eae'].max() + 0.1)
     return ax1
 
 def barplotI(outcome,site, resolution, font_size):
