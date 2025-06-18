@@ -8,6 +8,8 @@ from scripts.classification_methodV import *
 from scripts.classification_methodVI import * 
 import pandas as pd
 
+
+
 # SET DATA AND PARAMETERS
 FILE = "alta_floresta_daily.xlsx"   # Set file path and name (e.g. '...alta_floresta_daily.xlsx')
 aod_error = 0.01                    # Set AOD error (0.01 by default)
@@ -16,7 +18,17 @@ rri_error = 0.04                    # Set RRI error (0.04 by default)
 SITE = 'Alta Floresta'              # Set site name
 data = pd.read_excel(FILE)          # Organize data into a dataframe
 filter_aod = [False,0.4]             # Exclude aod<0.4 if filter_aod[0] = True 
-                                   
+
+methodI = pd.DataFrame(columns= ['M','MUIBB','BB','MDM','TMR'])
+methodII = pd.DataFrame(columns= ['M', 'D','SC','UI','BB','C','TMR'])
+methodIII = pd.DataFrame(columns= ['M','D','C','TMR'])
+methodIVA = pd.DataFrame(columns= ['D','UI','BB','NC','TMR'])
+methodIVB = pd.DataFrame(columns= ['StrAFP', 'MAFP', 'SliAFP', 'WAFP', 'MAP', 'MWAP', 'ACP', 'WACP','TMR'])
+methodV = pd.DataFrame(columns= ['D','UI','BB','NC','TMR'])
+methodVI = pd.DataFrame(columns= ['D','UI','BB','NC','TMR'])
+indice = 0
+lista = []
+
 
 # CALL TO CLASSIFICATION METHODS
 outcomeI, dfI = classify_methodI(data, aod_error, filter_aod)                      # Outcome from classification method I
@@ -26,6 +38,7 @@ outcomeIVA, dfIVA = classify_methodIVA(data, aod_error, ssa_error, filter_aod)  
 outcomeIVB, dfIVB = classify_methodIVB(data, aod_error, ssa_error, filter_aod)     # Outcome from classification method V
 outcomeV, dfV = classify_methodV(data, aod_error, ssa_error, filter_aod)           # Outcome from classification method VI
 outcomeVI, dfVI = classify_methodVI(data, aod_error, rri_error, filter_aod)        # Outcome from classification method VII
+
 
 # PLOTS
 distI = distribution_plotI(dfI,SITE,300,0.7,14)            # Plot of distribution with the classification method I
@@ -43,6 +56,12 @@ barV = barplotV(outcomeV,SITE,300,14)                      # Barplot of percenta
 distVI = distribution_plotVI(dfVI,SITE,300,0.7,14)         # Plot of distribution with the classification method VI
 barVI = barplotVI(outcomeVI,SITE,300,14)                   # Barplot of percentages with the classification method VI
 
+
+
+    
+    
+    
+'''    
 outcomeI.to_excel(f'{SITE}_MI.xlsx', index=False)
 outcomeII.to_excel(f'{SITE}_MII.xlsx', index=False)
 outcomeIII.to_excel(f'{SITE}_MIII.xlsx', index=False)
@@ -50,5 +69,5 @@ outcomeIVA.to_excel(f'{SITE}_MIVA.xlsx', index=False)
 outcomeIVB.to_excel(f'{SITE}_MIVB.xlsx', index=False)
 outcomeV.to_excel(f'{SITE}_MV.xlsx', index=False)
 outcomeVI.to_excel(f'{SITE}_MVI.xlsx', index=False)
-
+'''
 

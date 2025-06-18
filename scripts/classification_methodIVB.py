@@ -28,9 +28,9 @@ def classification_functionIVB(ssa,eae):
 
 def classify_methodIVB(data, aod_error, ssa_error, filter_aod):
     aerosol_types = {1: 'StrAFP', 2: 'MAFP', 3: 'SliAFP', 4: 'WAFP', 5: 'MAP', 6: 'MWAP', 7: 'ACP', 8: 'WACP'}
-    if 'eae440_870' not in data.columns:
-        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
-    df = data[['aod440', 'aod870', 'eae440_870', 'ssa440']].dropna().reset_index(drop=True)
+    if 'eae' not in data.columns:
+        data['eae'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
+    df = data[['aod440', 'aod870', 'eae', 'ssa440']].dropna().reset_index(drop=True)
     if filter_aod[0] == True:
         df = df[df['aod440'] >= filter_aod[1]]
     df4B= propagate_uncertainties(4, df, aod_error, ssa_error, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
@@ -38,7 +38,7 @@ def classify_methodIVB(data, aod_error, ssa_error, filter_aod):
     sub2 = df4B['eae_sub']
     sob1 = df4B['ssa_sob']
     sob2 = df4B['eae_sob']
-    df4B['class'] = [classification_functionIVB(a, e) for a, e in zip(df4B['ssa440'], df4B['eae440_870'])]
+    df4B['class'] = [classification_functionIVB(a, e) for a, e in zip(df4B['ssa440'], df4B['eae'])]
     df4B['class_00'] = [classification_functionIVB(a, e) for a, e in zip(sub1, sub2)]
     df4B['class_01'] = [classification_functionIVB(a, e) for a, e in zip(sub1, sob2)]
     df4B['class_10'] = [classification_functionIVB(a, e) for a, e in zip(sob1, sub2)]
@@ -49,22 +49,22 @@ def classify_methodIVB(data, aod_error, ssa_error, filter_aod):
 def distribution_plotIVB(df, site, resolution, transparency, font_size):
     fig1, ax1 = plt.subplots(dpi=300)
     patches_data = [
-    (1.2, 0, max(df['eae440_870'])-1.1, 0.87, 'k', 'StrAFP'),
-    (1.2, 0.85, max(df['eae440_870'])-1.1, 0.05, 'm', 'MAFP'),
-    (1.2, 0.9, max(df['eae440_870'])-1.1, 0.05, 'orange', 'SliAFP'),
-    (1.2, 0.95, max(df['eae440_870'])-1.1, max(df['ssa440'])-0.85, 'r', 'WAFP'),
+    (1.2, 0, max(df['eae'])-1.1, 0.87, 'k', 'StrAFP'),
+    (1.2, 0.85, max(df['eae'])-1.1, 0.05, 'm', 'MAFP'),
+    (1.2, 0.9, max(df['eae'])-1.1, 0.05, 'orange', 'SliAFP'),
+    (1.2, 0.95, max(df['eae'])-1.1, max(df['ssa440'])-0.85, 'r', 'WAFP'),
     (0.6, 0, 0.6, 0.95, 'blueviolet', 'MAP'),
     (0.6, 0.95, 0.6, max(df['ssa440'])-0.85, 'darkolivegreen', 'MWAP'),
     (0, 0, 0.6, 0.95, 'yellow', 'ACP'),
     (0, 0.95, 0.6, max(df['ssa440'])-0.85, 'blue', 'WACP'),]
     for x, y, w, h, color, label in patches_data:
         ax1.add_patch(patches.Rectangle((x, y), w, h, linewidth=3, edgecolor=color, facecolor=color, alpha=0.2, label=label))
-    ax1.scatter(df['eae440_870'], df['ssa440'], color='white', edgecolor='k', alpha=0.7)
+    ax1.scatter(df['eae'], df['ssa440'], color='white', edgecolor='k', alpha=0.7)
     ax1.legend(loc='upper right', bbox_to_anchor=(1.25, 1.2))
     ax1.set_xlabel(r'$EAE_{440/870}$', fontsize=14)
     ax1.set_ylabel(r'$SSA_{440}$', fontsize=14)
     ax1.set_title(f'{site} - SSA vs EAE (Zheng et al., 2020)', fontsize=14)
-    plt.xlim(0, df['eae440_870'].max() + 0.1)
+    plt.xlim(0, df['eae'].max() + 0.1)
     plt.ylim(0, df['ssa440'].max() + 0.1)
     return ax1
 

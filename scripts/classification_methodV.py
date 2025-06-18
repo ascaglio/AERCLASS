@@ -20,9 +20,9 @@ def classification_functionV(aae,eae,dist1,dist2):
 
 def classify_methodV(data, aod_error, ssa_error, filter_aod):
     aerosol_types = {1: 'D', 2: 'UI', 3: 'BB', 4: 'NC'}
-    if 'eae440_870' not in data.columns:
-        data['eae440_870'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
-    df = data[['aod440', 'aod870', 'ssa440', 'ssa870', 'eae440_870']].dropna().reset_index(drop=True)
+    if 'eae' not in data.columns:
+        data['eae'] = np.log(data['aod870']/data['aod440'])/np.log(440/870)
+    df = data[['aod440', 'aod870', 'ssa440', 'ssa870', 'eae']].dropna().reset_index(drop=True)
     if filter_aod[0] == True:
         df = df[df['aod440'] >= filter_aod[1]]
     df5= propagate_uncertainties(5, df, aod_error, ssa_error, 0)      # Uncertainties propagation (if AOD, SSA or RRI are not used, then set them with 0)
@@ -31,8 +31,8 @@ def classify_methodV(data, aod_error, ssa_error, filter_aod):
     sob1 = df5['aae_sob']
     sob2 = df5['eae_sob']
     UI_cen, BB_cen = [1.3, 0.925], [1.3, 0.865]
-    dist1, dist2 = distance([df5['eae440_870'], df5['aae']], UI_cen), distance([df5['eae440_870'], df5['aae']], BB_cen)
-    df5['class'] = [classification_functionV(a, e, f, g) for a, e, f, g in zip(df5['aae'], df5['eae440_870'], dist1, dist2)]
+    dist1, dist2 = distance([df5['eae'], df5['aae']], UI_cen), distance([df5['eae'], df5['aae']], BB_cen)
+    df5['class'] = [classification_functionV(a, e, f, g) for a, e, f, g in zip(df5['aae'], df5['eae'], dist1, dist2)]
     df5['class_00'] = [classification_functionV(a, e, f, g) for a, e, f, g in zip(sub1, sub2, dist1, dist2)]
     df5['class_01'] = [classification_functionV(a, e, f, g) for a, e, f, g in zip(sub1, sob2, dist1, dist2)]
     df5['class_10'] = [classification_functionV(a, e, f, g) for a, e, f, g in zip(sob1, sub2, dist1, dist2)]
@@ -49,12 +49,12 @@ def distribution_plotV(df, site, resolution, transparency, font_size):
     (0.1, 0.1, 0.01, 0.01, 'white', 'NC'),]
     for x, y, w, h, color, label in patches_data:
         ax1.add_patch(patches.Rectangle((x, y), w, h, linewidth=3, edgecolor=color, facecolor=color, alpha=0.2, label=label))
-    ax1.scatter(df['eae440_870'], df['aae'], color='white', edgecolor='k', alpha=0.7)
+    ax1.scatter(df['eae'], df['aae'], color='white', edgecolor='k', alpha=0.7)
     ax1.legend(loc='upper right', bbox_to_anchor=(1.25, 1.2))
     ax1.set_xlabel(r'$EAE_{440/870}$', fontsize=14)
     ax1.set_ylabel(r'$AAE_{870/440}$', fontsize=14)
     ax1.set_title(f'{site} - AAE vs EAE (Liu and Yi, 2022)', fontsize=14)
-    plt.xlim(0, df['eae440_870'].max() + 0.1)
+    plt.xlim(0, df['eae'].max() + 0.1)
     plt.ylim(0, df['aae'].max() + 0.1)
     return ax1
 
