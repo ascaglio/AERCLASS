@@ -8,8 +8,6 @@ from scripts.classification_methodV import *
 from scripts.classification_methodVI import * 
 import pandas as pd
 
-
-
 # SET DATA AND PARAMETERS
 FILE = "alta_floresta_daily.xlsx"   # Set file path and name (e.g. '...alta_floresta_daily.xlsx')
 aod_error = 0.01                    # Set AOD error (0.01 by default)
@@ -18,16 +16,6 @@ rri_error = 0.04                    # Set RRI error (0.04 by default)
 SITE = 'Alta Floresta'              # Set site name
 data = pd.read_excel(FILE)          # Organize data into a dataframe
 filter_aod = [False,0.4]             # Exclude aod<0.4 if filter_aod[0] = True 
-
-methodI = pd.DataFrame(columns= ['M','MUIBB','BB','MDM','TMR'])
-methodII = pd.DataFrame(columns= ['M', 'D','SC','UI','BB','C','TMR'])
-methodIII = pd.DataFrame(columns= ['M','D','C','TMR'])
-methodIVA = pd.DataFrame(columns= ['D','UI','BB','NC','TMR'])
-methodIVB = pd.DataFrame(columns= ['StrAFP', 'MAFP', 'SliAFP', 'WAFP', 'MAP', 'MWAP', 'ACP', 'WACP','TMR'])
-methodV = pd.DataFrame(columns= ['D','UI','BB','NC','TMR'])
-methodVI = pd.DataFrame(columns= ['D','UI','BB','NC','TMR'])
-indice = 0
-lista = []
 
 
 # CALL TO CLASSIFICATION METHODS

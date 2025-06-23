@@ -12,10 +12,10 @@ def propagate_uncertainties(method, df, aod_error, ssa_error, rri_error):
     LOG_RATIO = np.log(440 / 870)  # Precompute the constant log ratio
     LOG_DIFF = math.log10(870) - math.log10(440)
     aod_sob, aod_sub = df['aod440'] + aod_error, np.maximum(df['aod440'] - aod_error, 0)
-    if 'eae440_870' in df.columns:
+    if 'eae' in df.columns:
         eae_error = np.abs(((1 / (df['aod870'] * LOG_RATIO)) + 
                     (1 / (df['aod440'] * LOG_RATIO))) * aod_error)
-        eae_sob, eae_sub = df['eae440_870'] + eae_error, np.maximum(df['eae440_870'] - eae_error, 0)
+        eae_sob, eae_sub = df['eae'] + eae_error, np.maximum(df['eae'] - eae_error, 0)
     if method == 1:
         df['eae_error'] = eae_error
         df['eae_sob'], df['eae_sub'] = eae_sob, eae_sub
@@ -29,7 +29,7 @@ def propagate_uncertainties(method, df, aod_error, ssa_error, rri_error):
         df['fmf_sob'], df['fmf_sub'] = df['fmf500'] + df['rmse_fmf'], np.maximum(df['fmf500'] - df['rmse_fmf'], 0)
         df['aod500_sob'], df['aod500_sub'] = df['aod500'] + aod_error, np.maximum(df['aod500'] - aod_error, 0)
     elif method == 4:
-        df['eae_error'] = eae_error
+        df['eae'] = eae_error
         df['eae_sob'], df['eae_sub'] = eae_sob, eae_sub
         df['ssa_sob'], df['ssa_sub'] = df['ssa440'] + ssa_error, np.maximum(df['ssa440'] - ssa_error, 0)
     elif method == 5:
