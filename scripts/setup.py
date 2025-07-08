@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='aerclass',
-    version='1.0',
+    version='0.1.0',
     packages=find_packages(),
     install_requires=[
         'pandas',
@@ -14,7 +14,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'classify_aerosol=aerosol_classification.classification_method_i:classify_aod_ssa',
+            'aerclass = aerclass.main:main'
         ],
     },
 )
