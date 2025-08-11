@@ -1,5 +1,3 @@
-#RECORDAR CAMBIAR LOS VALORES SUBESTIMADOS PARA QUE NO SEAN NEGATIVOS
-
 #Complete usage example of AERCLASS with all methods
 
 import pandas as pd
@@ -31,13 +29,13 @@ FILTER_AOD = [False, 0.4]
 # Run all methods and generate plots
 # --------------------
 methods = {
-    "Method I": (classify_methodI, {'aod_error': AOD_ERROR, 'filter_aod': FILTER_AOD}, 'aod440', 'eae440_870'),
+    "Method I": (classify_methodI, {'aod_error': AOD_ERROR, 'filter_aod': FILTER_AOD}, 'aod440', 'eae'),
     "Method II": (classify_methodII, {'aod_error': AOD_ERROR, 'filter_aod': FILTER_AOD}, 'aod440', 'arod'),
     "Method III": (classify_methodIII, {'aod_error': AOD_ERROR, 'filter_aod': FILTER_AOD}, 'aod500', 'fmf500'),
-    "Method IVA": (classify_methodIVA, {'aod_error': AOD_ERROR, 'ssa_error': SSA_ERROR, 'filter_aod': FILTER_AOD}, 'eae440_870', 'ssa440'),
-    "Method IVB": (classify_methodIVB, {'aod_error': AOD_ERROR, 'ssa_error': SSA_ERROR, 'filter_aod': FILTER_AOD}, 'eae440_870', 'ssa440'),
-    "Method V": (classify_methodV, {'aod_error': AOD_ERROR, 'ssa_error': SSA_ERROR, 'filter_aod': FILTER_AOD}, 'eae440_870', 'aae'),
-    "Method VI": (classify_methodVI, {'aod_error': AOD_ERROR, 'rri_error': RRI_ERROR, 'filter_aod': FILTER_AOD}, 'eae440_870', 'rri440'),
+    "Method IVA": (classify_methodIVA, {'aod_error': AOD_ERROR, 'ssa_error': SSA_ERROR, 'filter_aod': FILTER_AOD}, 'eae', 'ssa440'),
+    "Method IVB": (classify_methodIVB, {'aod_error': AOD_ERROR, 'ssa_error': SSA_ERROR, 'filter_aod': FILTER_AOD}, 'eae', 'ssa440'),
+    "Method V": (classify_methodV, {'aod_error': AOD_ERROR, 'ssa_error': SSA_ERROR, 'filter_aod': FILTER_AOD}, 'eae', 'aae'),
+    "Method VI": (classify_methodVI, {'aod_error': AOD_ERROR, 'rri_error': RRI_ERROR, 'filter_aod': FILTER_AOD}, 'eae', 'rri440'),
 }
 
 
