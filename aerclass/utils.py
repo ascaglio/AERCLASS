@@ -3,10 +3,67 @@
 import pandas as pd
 import numpy as np
 
+AEROSOL_STYLES = {
+    "M":  {"label": "M",  "color": "b"},
+    "MUIBB":  {"label": "MUIBB",  "color": "m"},
+    "BB": {"label": "BB", "color": "grey"},
+    "MDM": {"label": "MDM", "color": "g"},
+    "D": {"label": "D", "color": "yellow"},
+    "SC": {"label":"SC", "color": "purple"},
+    "UI": {"label":"UI", "color": "r"},
+    "C": {"label":"C", "color": "brown"},
+    "NC": {"label":"NC", "color": "white"},
+    "StrAFP": {"label":"StrAFP", "color": "orange"},
+    "MAFP": {"label":"MAFP", "color": "pink"},
+    "SliAFP": {"label":"SliAFP", "color": "olive"},
+    "WAFP": {"label":"WAFP", "color": "cyan"},
+    "MAP": {"label":"MAP", "color": "rosybrown"},
+    "MWAP": {"label":"MWAP", "color": "indianred"},
+    "ACP": {"label":"ACP", "color": "chocolate"},
+    "WACP": {"label":"WACP", "color": "teal"}
+}
+
+CLASS_NUMERIC_TO_CODE = {
+    1: "M",
+    2: "MUIBB",
+    3: "BB",
+    4: "MDM",
+    5: "D",
+    6: "SC",
+    7: "UI",
+    8: "C",
+    9: "NC",
+    10: "StrAFP",
+    11: "MAFP",
+    12: "SliAFP",
+    13: "WAFP",
+    14: "MAP",
+    15: "MWAP",
+    16: "ACP",
+    17: "WACP"
+}
+
+METHOD_TO_CLASSES = {
+    "Method I": [CLASS_NUMERIC_TO_CODE[i] for i in (1, 2, 3, 4)],
+    "Method II": [CLASS_NUMERIC_TO_CODE[i] for i in (1, 5, 6, 7, 3, 8)],
+    "Method III": [CLASS_NUMERIC_TO_CODE[i] for i in (1, 5, 8)],
+    "Method IVA": [CLASS_NUMERIC_TO_CODE[i] for i in (5, 7, 3, 9)],
+    "Method IVB": [CLASS_NUMERIC_TO_CODE[i] for i in range(10, 18)],
+    "Method V": [CLASS_NUMERIC_TO_CODE[i] for i in (5, 7, 3, 9)],
+    "Method VI": [CLASS_NUMERIC_TO_CODE[i] for i in (5, 7, 3, 9)]
+}
+
+def ensure_class_code(df):
+
+    if "class_code" not in df.columns and "class" in df.columns:
+        df["class_code"] = df["class"].map(CLASS_NUMERIC_TO_CODE)
+    return df
+
 def compute_missclasification(df, original_data, aerosol_types):
     """
     Computes the misclassification rate and aerosol percentages, and adds global metrics.
     """
+    df = ensure_class_code(df)
     result = []
     total_points = len(df)
     misclassified_total = 0
@@ -36,10 +93,8 @@ def compute_missclasification(df, original_data, aerosol_types):
 
     outcome_df = pd.DataFrame(result)
 
-    # --- Global metrics ---
     mr_global = 100 * misclassified_total / total_points if total_points > 0 else 0
 
-    # Add summary row
     outcome_df = pd.concat([
         outcome_df,
         pd.DataFrame([{

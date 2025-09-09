@@ -24,6 +24,9 @@ AOD_ERROR = 0.01
 SSA_ERROR = 0.03
 RRI_ERROR = 0.04
 FILTER_AOD = [False, 0.4]
+dpi = 300
+alpha = 0.4
+fontsize = 14
 
 # --------------------
 # Run all methods and generate plots
@@ -45,10 +48,10 @@ for method_name, (func, kwargs, xvar, yvar) in methods.items():
     outcome, df = func(data.copy(), **kwargs)
 
     # Scatter plot in classification space
-    dist_ax = distribution_plot(df, method_name, SITE, xvar=xvar, yvar=yvar)
+    dist_ax = distribution_plot(df, method_name, SITE, xvar=xvar, yvar=yvar, dpi=dpi, alpha=alpha, fontsize=fontsize)
 
     # Bar plot of misclassification
-    bar_ax = barplot(outcome, method_name, SITE)
+    bar_ax = barplot(outcome, method_name, SITE, dpi=dpi, fontsize=fontsize)
 
     plt.show()
 
