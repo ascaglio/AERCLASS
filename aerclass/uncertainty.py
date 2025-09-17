@@ -1,8 +1,6 @@
 # uncertainty.py - Error propagation module for AERCLASS
 
 import numpy as np
-import pandas as pd
-
 
 # Monte Carlo
 def propagate_with_montecarlo(func, inputs, errors, n_iter=5000):
