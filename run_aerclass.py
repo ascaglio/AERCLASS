@@ -1,5 +1,8 @@
-#Complete usage example of AERCLASS with all methods
+#example.py - Complete usage example of AERCLASS with all methods
 
+# --------------------
+# Import libraries and AERCLASS submodules
+# --------------------
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -30,7 +33,7 @@ alpha = 0.4
 fontsize = 14
 
 # --------------------
-# Run all methods and generate plots
+# Run all methods
 # --------------------
 methods = {
     "Method I": (classify_methodI, {'aod_error': AOD_ERROR, 'filter_aod': FILTER_AOD}, 'aod440', 'eae'),
@@ -42,23 +45,16 @@ methods = {
     "Method VI": (classify_methodVI, {'aod_error': AOD_ERROR, 'rri_error': RRI_ERROR, 'filter_aod': FILTER_AOD}, 'eae', 'rri440'),
 }
 
-
+# --------------------
+# Generate plots and save results
+# --------------------
 for method_name, (func, kwargs, xvar, yvar) in methods.items():
     print(f"\nRunning {method_name}...")
-    #Generate output DataFrames
     outcome, df = func(data.copy(), **kwargs)
-
-    # Scatter plot in classification space
     dist_ax = distribution_plot(df, method_name, SITE, xvar=xvar, yvar=yvar, dpi=dpi, alpha=alpha, fontsize=fontsize)
-
-    # Bar plot of misclassification
     bar_ax = barplot(outcome, method_name, SITE, dpi=dpi, fontsize=fontsize)
-
     plt.show()
-
-    # Save results
     df.to_csv(f'{method_name.replace(" ", "_").lower()}_classified_data.csv', index=False)
     outcome.to_csv(f'{method_name.replace(" ", "_").lower()}_summary.csv', index=False)
     print("Saved data and summary for", method_name)
-
 print("\nAll methods completed.")

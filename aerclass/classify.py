@@ -1,4 +1,8 @@
-# Classification methods for AERCLASS
+# classify.py - Classification methods for AERCLASS
+
+# --------------------------
+# Import libraries and AERCLASS submodules
+# --------------------------
 
 import numpy as np
 from aerclass.uncertainty import propagate_uncertainties
@@ -6,10 +10,16 @@ from aerclass.utils import (compute_missclasification, calculate_eae,
                             calculate_arod, calculate_aae, ensure_class_code, 
                             CLASS_NUMERIC_TO_CODE, METHOD_TO_CLASSES)
 
+# --------------------------
+# Compute euclidean distances
+# --------------------------
 
 def compute_dist(p1, p2):
     return np.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
+# --------------------------
+# Run classification
+# --------------------------
 
 def run_classification(df, func, xcol, ycol, method_id,
                        aod_error=0.01, ssa_error=0.03, rri_error=0.04):

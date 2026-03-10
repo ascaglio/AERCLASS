@@ -1,10 +1,15 @@
 # plots.py - Centralized plotting functions for AERCLASS
 
+# --------------------------
+# Import libraries and AERCLASS submodules
+# --------------------------
 import matplotlib.pyplot as plt
 import seaborn as sns
 from aerclass.utils import CLASS_NUMERIC_TO_CODE, METHOD_TO_CLASSES, AEROSOL_STYLES
 
-
+# --------------------------
+# Distribution plot
+# --------------------------
 def distribution_plot(df, method_name, site, xvar, yvar, dpi=300, alpha=0.8, fontsize=14, classvar='class_code'):
     """
     Generates a scatter plot showing classified data points in a 2D feature space.
@@ -27,6 +32,9 @@ def distribution_plot(df, method_name, site, xvar, yvar, dpi=300, alpha=0.8, fon
     plt.tight_layout()
     return ax
 
+# --------------------------
+# Barplot
+# --------------------------
 def barplot(outcome_df, method_name, site, dpi=300, fontsize=14):
     """
     Generates a bar plot of misclassification rates per aerosol type.

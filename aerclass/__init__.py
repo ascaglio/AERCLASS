@@ -2,13 +2,17 @@
 
 __version__ = "1.0.0"
 
+# --------------------------
 # Import main submodules
+# --------------------------
 from . import classify
 from . import uncertainty
 from . import utils
 from . import plots
 
-# ---- Import core functions for direct access ----
+# --------------------------
+# Import core functions for direct access
+# --------------------------
 from .classify import (
     classify_methodI, classify_methodII, classify_methodIII,
     classify_methodIVA, classify_methodIVB,
@@ -16,7 +20,9 @@ from .classify import (
 )
 from .plots import distribution_plot, barplot
 
-# ---- Define public API ----
+# --------------------------
+# Define public API
+# --------------------------
 __all__ = [
     "classify_methodI", "classify_methodII", "classify_methodIII",
     "classify_methodIVA", "classify_methodIVB",

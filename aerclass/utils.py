@@ -1,8 +1,14 @@
 # utils.py - Utility functions for AERCLASS
 
+# --------------------------
+# Import libraries
+# --------------------------
 import pandas as pd
 import numpy as np
 
+# --------------------------
+# Acronyms for aerosols and coding
+# --------------------------
 AEROSOL_STYLES = {
     "M":  {"label": "M",  "color": "b"},
     "MUIBB":  {"label": "MUIBB",  "color": "m"},
@@ -59,6 +65,9 @@ def ensure_class_code(df):
         df["class_code"] = df["class"].map(CLASS_NUMERIC_TO_CODE)
     return df
 
+# --------------------------
+# Compute missclasification
+# --------------------------
 def compute_missclasification(df, original_data, aerosol_types):
     """
     Computes the misclassification rate and aerosol percentages, and adds global metrics.
@@ -105,6 +114,9 @@ def compute_missclasification(df, original_data, aerosol_types):
 
     return outcome_df
 
+# --------------------------
+# Calculate composite variables
+# --------------------------
 def calculate_eae(aod440, aod870):
     """Calculate extinction Ångstrom exponent from AODs at 440 and 870 nm."""
     return np.log(aod870 / aod440) / np.log(440 / 870)
