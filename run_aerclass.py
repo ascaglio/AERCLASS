@@ -30,7 +30,7 @@ def main():
     # --------------------
     # Load data
     # --------------------
-    FILE = 'alta_floresta_daily.xlsx'
+    FILE = 'example/data/alta_floresta_daily.xlsx'
     SITE = 'Alta Floresta'
 
     data = pd.read_excel(FILE)
