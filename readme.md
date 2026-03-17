@@ -1,10 +1,9 @@
-# AERCLASS
++------------------# AERCLASS
 
 ```{=html}
 <p align="center">
 ```
-`<img src="docs/images/logo.png" width="300">`{=html}
-```{=html}
+<img src="/docs/images/scatter.png" width="500">```{=html}
 </p>
 ```
 ```{=html}
