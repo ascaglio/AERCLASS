@@ -1,6 +1,3 @@
-AERCLASS
-
-
 <img src="/docs/images/logo.png" width="500">
 </p>
 

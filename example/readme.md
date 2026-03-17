@@ -49,7 +49,7 @@ variables.
 
 Example structure of the input table:
 
-![Input dataset example](../docs/images/input_data.png)
+![Input dataset example](/docs/images/input_data.png)
 
 ------------------------------------------------------------------------
 
@@ -94,7 +94,7 @@ This table contains:
 
 Example output:
 
-![Classified data table](../docs/images/output_classified_table.png)
+![Classified data table](../docs/images/output_classified.png)
 
 ------------------------------------------------------------------------
 
@@ -109,7 +109,7 @@ identified in the dataset.
 
 Example summary table:
 
-![Summary table](../docs/images/output_summary_table.png)
+![Summary table](../docs/images/output_summary.png)
 
 ------------------------------------------------------------------------
 
