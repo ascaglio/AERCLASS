@@ -1,16 +1,11 @@
-+------------------# AERCLASS
+AERCLASS
 
-```{=html}
-<p align="center">
-```
-<img src="/docs/images/scatter.png" width="500">```{=html}
+
+<img src="/docs/images/logo.png" width="500">
 </p>
-```
-```{=html}
-<p align="center">
+
 Uncertainty-aware aerosol classification from optical observations
 </p>
-```{=html}
 
 **Aerosol Classification & Uncertainty Analysis Toolkit**
 
