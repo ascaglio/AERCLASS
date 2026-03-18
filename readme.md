@@ -1,4 +1,5 @@
-<img src="/docs/images/logo.png" width="500">
+<p align="center">
+<img src="/docs/images/logo.png" width="200">
 </p>
 
 Uncertainty-aware aerosol classification from optical observations
