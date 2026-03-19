@@ -1,6 +1,6 @@
 <p align="center">
   <img src="/docs/images/logo.png" width="200"><br>
-  *Uncertainty-aware aerosol classification from optical observations*
+  <em>Uncertainty-aware aerosol classification from optical observations</em>
 </p>
 
 **Aerosol Classification & Uncertainty Analysis Toolkit**
@@ -106,7 +106,7 @@ Misclassification rate estimation → Visualization and analysis
 ## Methods Implemented
 
 |  ID  |  Method                   |  Variables       |  Source                 |
-|------|---------------------------|----------------- |------------------------ |
+|:-----|:--------------------------|:---------------- |:----------------------- |
 |  I   |  EAE vs AOD               |  AOD440, EAE     |  Cúneo et al. (2022)    |
 |  II  |  AROD vs AOD              |  AOD1020, AOD440 |  Chen et al. (2016)     |
 |  III |  FMF vs AOD               |  FMF500, AOD440  |  Barnaba & Gobbi (2004) | 
