@@ -15,7 +15,7 @@ observations.
 
 AERCLASS was developed primarily for atmospheric research using
 **AERONET** data but can be applied to any dataset providing the
-required optical variables.
+required optical variables and their uncertainties.
 
 ------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ Aerosol classification schemes are widely used to infer dominant aerosol
 types from optical observations. These approaches typically rely on
 threshold-based relationships between variables such as aerosol optical
 depth (AOD), Ångström exponent (EAE), single scattering albedo (SSA),
-refractive index, among others.
+refractive index (Ri), among others.
 
 However, the **uncertainty associated with these measured or computed 
 variables is rarely propagated into the classification itself**. As a 
@@ -53,7 +53,7 @@ methods.
 -   **Uncertainty propagation** using partial derivatives and Monte
     Carlo simulations
 -   Estimation of **misclassification rates (MR)** for each aerosol type
--   Visualization tools for classification diagrams and uncertainty
+-   Visualization tools for classification and uncertainty
     bounds
 -   Compatible with **AERONET** data and external observational datasets
 -   Modular and extensible architecture for adding new classification
@@ -91,7 +91,7 @@ This will:
 4.  Calculate misclassification rates
 5.  Generate figures and output tables
 
-Results will be saved in the `output/` directory.
+Results will be saved in the output directory of your choosing.
 
 ------------------------------------------------------------------------
 
