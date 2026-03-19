@@ -1,8 +1,6 @@
 <p align="center">
-<img src="/docs/images/logo.png" width="200">
-</p>
-
-Uncertainty-aware aerosol classification from optical observations
+  <img src="/docs/images/logo.png" width="200"><br>
+  Uncertainty-aware aerosol classification from optical observations
 </p>
 
 **Aerosol Classification & Uncertainty Analysis Toolkit**
