@@ -3,7 +3,6 @@
   <em>Uncertainty-aware aerosol classification from optical observations</em>
 </p>
 
-**Aerosol Classification & Uncertainty Analysis Toolkit**
 
 AERCLASS is an open-source Python package designed to apply widely used
 **two-dimensional aerosol classification schemes** and quantify the
@@ -158,3 +157,8 @@ https://github.com/ascaglio
 ## Contributing
 
 Contributions, suggestions, and feedback are welcome.
+If you would like to contribute to AERCLASS, you can:
+
+- Open an issue to report bugs or suggest improvements
+- Submit a pull request with new features or fixes
+- Share feedback or questions through GitHub Discussions
