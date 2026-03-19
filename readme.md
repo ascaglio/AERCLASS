@@ -1,6 +1,6 @@
 <p align="center">
   <img src="/docs/images/logo.png" width="200"><br>
-  Uncertainty-aware aerosol classification from optical observations
+  *Uncertainty-aware aerosol classification from optical observations*
 </p>
 
 **Aerosol Classification & Uncertainty Analysis Toolkit**
@@ -105,23 +105,15 @@ Misclassification rate estimation → Visualization and analysis
 
 ## Methods Implemented
 
-  ID    Method                     Variables         Source
-  ----- -------------------------- ----------------- ------------------------
-  I     EAE vs AOD                 AOD440, EAE       Cúneo et al. (2022)
-  II    AROD vs AOD                AOD1020, AOD440   Chen et al. (2016)
-  III   FMF vs AOD                 FMF500, AOD440    Barnaba & Gobbi (2004)
-  IVA   SSA vs EAE                 SSA440, EAE       Liu & Yi (2022)
-  IVB   SSA vs EAE (fine/coarse)   SSA440, EAE       Zheng et al. (2021)
-  V     AAE vs EAE                 AAE, EAE          Liu & Yi (2022)
-  VI    RRI vs EAE                 RRI440, EAE       Liu & Yi (2022)
-
-------------------------------------------------------------------------
-
-## Repository Structure
-
-AERCLASS/ │ ├── aerclass/ │ ├── classify/ │ ├── uncertainty/ │ ├──
-plots/ │ └── utils/ │ ├── data/ ├── output/ │ ├── example.py ├── main.py
-│ ├── requirements.txt ├── setup.py └── README.md
+|  ID  |  Method                   |  Variables       |  Source                 |
+|------|---------------------------|----------------- |------------------------ |
+|  I   |  EAE vs AOD               |  AOD440, EAE     |  Cúneo et al. (2022)    |
+|  II  |  AROD vs AOD              |  AOD1020, AOD440 |  Chen et al. (2016)     |
+|  III |  FMF vs AOD               |  FMF500, AOD440  |  Barnaba & Gobbi (2004) | 
+|  IVA |  SSA vs EAE               |  SSA440, EAE     |  Liu & Yi (2022)        |
+|  IVB |  SSA vs EAE (fine/coarse) |  SSA440, EAE     |  Zheng et al. (2021)    |
+|  V   |  AAE vs EAE               |  AAE, EAE        |  Liu & Yi (2022)        |
+|  VI  |  RRI vs EAE               |  RRI440, EAE     |  Liu & Yi (2022)        |
 
 ------------------------------------------------------------------------
 
