@@ -124,8 +124,9 @@ scheme and the corresponding aerosol-type regions.
 
 Example:
 
-![Scatter plot](../docs/images/scatter.png)
-
+<p align="center">
+  <img src="../docs/images/scatter.png" width="400">
+</p>
 ------------------------------------------------------------------------
 
 ### Frequency bar plot
@@ -134,8 +135,9 @@ Bar chart showing the relative occurrence of each aerosol type.
 
 Example:
 
-![Bar plot](../docs/images/barplot.png)
-
+<p align="center">
+  <img src="../docs/images/barplot.png" width="400">
+</p>
 ------------------------------------------------------------------------
 
 # Notes
