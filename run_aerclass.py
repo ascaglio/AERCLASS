@@ -7,13 +7,14 @@ This script demonstrates the basic workflow of the AERCLASS package:
 3. Propagate measurement uncertainties
 4. Estimate misclassification probabilities
 
-Modify the input data path and parameters as needed.
+Users can control whether outputs (CSV files and figures) are saved.
 """
 
 # --------------------------------------------------
 # Import libraries and AERCLASS submodules
 # --------------------------------------------------
 
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -26,6 +27,24 @@ from aerclass import (
 
 
 def main():
+
+    # --------------------
+    # User options
+    # --------------------
+    SAVE_CSV = True
+    SAVE_FIGURES = True
+    SHOW_PLOTS = True
+
+    OUTPUT_DIR = "output"
+    FIG_DIR = os.path.join(OUTPUT_DIR, "figures")
+    CSV_DIR = os.path.join(OUTPUT_DIR, "tables")
+
+    # Crear carpetas solo si hace falta
+    if SAVE_CSV:
+        os.makedirs(CSV_DIR, exist_ok=True)
+
+    if SAVE_FIGURES:
+        os.makedirs(FIG_DIR, exist_ok=True)
 
     # --------------------
     # Load data
@@ -67,8 +86,12 @@ def main():
 
         print(f"\nRunning {method_name}...")
 
+        safe_name = method_name.replace(" ", "_").lower()
+
+        # Run classification
         outcome, df = func(data.copy(), **kwargs)
 
+        # Generate plots
         dist_ax = distribution_plot(
             df,
             method_name,
@@ -88,19 +111,45 @@ def main():
             fontsize=fontsize
         )
 
-        plt.show()
+        # --------------------
+        # Save figures
+        # --------------------
+        if SAVE_FIGURES:
+            dist_ax.figure.savefig(
+                os.path.join(FIG_DIR, f"{safe_name}_scatter.png"),
+                dpi=dpi,
+                bbox_inches="tight"
+            )
 
-        df.to_csv(
-            f'{method_name.replace(" ", "_").lower()}_classified_data.csv',
-            index=False
-        )
+            bar_ax.figure.savefig(
+                os.path.join(FIG_DIR, f"{safe_name}_barplot.png"),
+                dpi=dpi,
+                bbox_inches="tight"
+            )
 
-        outcome.to_csv(
-            f'{method_name.replace(" ", "_").lower()}_summary.csv',
-            index=False
-        )
+        # --------------------
+        # Show plots
+        # --------------------
+        if SHOW_PLOTS:
+            plt.show()
+        else:
+            plt.close('all')
 
-        print("Saved data and summary for", method_name)
+        # --------------------
+        # Save CSV outputs
+        # --------------------
+        if SAVE_CSV:
+            df.to_csv(
+                os.path.join(CSV_DIR, f"{safe_name}_classified_data.csv"),
+                index=False
+            )
+
+            outcome.to_csv(
+                os.path.join(CSV_DIR, f"{safe_name}_summary.csv"),
+                index=False
+            )
+
+        print(f"Finished {method_name}")
 
     print("\nAll methods completed.")
 
