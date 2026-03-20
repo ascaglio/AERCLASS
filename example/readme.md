@@ -20,7 +20,7 @@ The dataset provided in this folder:
     data/alta_floresta_daily.xlsx
 
 contains aerosol optical properties derived from AERONET observations at
-the Alta Floresta site.
+the Alta Floresta site. We thank the PI and Co-I and their staff for establishing and maintaining the Alta Floresta site used in this example.
 
 The file is used only as an example dataset to demonstrate how AERCLASS
 processes input data.
@@ -34,15 +34,15 @@ properties. Each row corresponds to one observation.
 
 Typical variables used by the classification methods include:
 
-  Variable   Description
-  ---------- ------------------------------------
-  aod440     Aerosol Optical Depth at 440 nm
-  aod500     Aerosol Optical Depth at 500 nm
-  eae        Ångström Exponent
-  arod       Aerosol Optical Depth Ratio
-  fmf500     Fine Mode Fraction
-  ssa440     Single Scattering Albedo at 440 nm
-  rri440     Real Refractive Index
+  | Variable | Description                         |
+  |:-------  |:------------------------------------|
+  |aod440    |  Aerosol Optical Depth at 440 nm    |  
+  |aod500    |  Aerosol Optical Depth at 500 nm    | 
+  |eae       |  Ångström Exponent                  |
+  |arod      |  Aerosol Relative Optical Depth     |
+  |fmf500    |  Fine Mode Fraction at 500nm        |
+  |ssa440    |  Single Scattering Albedo at 440 nm | 
+  |rri440    |  Real Refractive Index at 440nm     |
 
 Different classification methods require different combinations of these
 variables.
