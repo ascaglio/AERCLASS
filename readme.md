@@ -116,6 +116,25 @@ Misclassification rate estimation → Visualization and analysis
 
 ------------------------------------------------------------------------
 
+## Types of aerosol
+
+M: Maritime
+MUIBB: Mixed Urban/Industrial/Biomass Burning
+BB: Biomass Burning
+MDM: Mixed Dust/Maritime
+D: Dust
+SC: Subcontinental
+UI: Urban/Industrial
+C: Continental
+NC: Non Classified
+StrAFP: Strongly Absorbing Fine Mode Particles
+SliAFP: Slightly Absorbing Fine Mode Particles
+WAFP: Weakly Absorbing Fine Mode Particles
+MAP: Mixed Absorbing Particles
+MWAP: Mixed Weakly Absorbing Particles
+ACP: Absorbing Coarse Mode Particles
+WACP: Weakly Absorbing Coarse Mode Particles
+
 ## Scientific Applications
 
 AERCLASS can support research in:

@@ -20,7 +20,8 @@ The dataset provided in this folder:
     data/alta_floresta_daily.xlsx
 
 contains aerosol optical properties derived from AERONET observations at
-the Alta Floresta site. We thank the PI and Co-I and their staff for establishing and maintaining the Alta Floresta site used in this example.
+the Alta Floresta site. We thank the PI and Co-I and their staff for 
+establishing and maintaining the Alta Floresta site used in this example.
 
 The file is used only as an example dataset to demonstrate how AERCLASS
 processes input data.
@@ -47,7 +48,7 @@ Typical variables used by the classification methods include:
 Different classification methods require different combinations of these
 variables.
 
-Example structure of the input table:
+Example structure of the input table (respect columns headers):
 
 ![Input dataset example](/docs/images/input_data.png)
 
@@ -76,7 +77,9 @@ The script will automatically:
 
 # Outputs
 
-For each classification method the script produces several outputs.
+For each classification method the script produces several outputs. A 
+folder called "output" is created, csv's and figures can be saved there 
+by user request (using SAVE_CSV and SAVE_FIGURES booleans).
 
 ------------------------------------------------------------------------
 
@@ -105,7 +108,7 @@ Example file:
     method_I_summary.csv
 
 These tables summarize the relative frequency of each aerosol type
-identified in the dataset.
+identified in the dataset and its misclassification rate.
 
 Example summary table:
 
@@ -148,6 +151,6 @@ purposes.
 Users can adapt the script `run_aerclass.py` to analyze their own
 datasets by modifying:
 
--   the input file
--   uncertainty parameters
--   filtering options
+-   the input file (FILE)
+-   uncertainty parameters ( AOD_ERROR, SSA_ERROR, RRI_ERROR)
+-   filtering options (FILTER_AOD)
